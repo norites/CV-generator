@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Form</title>
+    <style>
+         form {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #imagePreview {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.inline-label {
+    display: inline;   /* This makes sure the label stays inline with following elements */
+    margin-right: 5px; /* Optional: Adds a small space between the label and the checkbox */
+}
+.block {
+    display: none;
+}
+/* General button styling */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover & Active States */
+button:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Specific styles for different types of buttons */
+.button-next, .button-back {
+    background-color: #0056b3;
+    color: #fff;
+    margin: 5px;
+}
+
+.button-add, .button-remove {
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 5px;
+}
+
+.button-remove {
+    background-color: #dc3545;
+    color: #fff;
+}
+/* Updated Button Group Styling */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align vertically */
+    margin-top: 20px;
+}
+
+.button-group .action-buttons {
+    display: flex;
+    align-items: center;
+}
+
+/* Add some spacing between the action buttons (Add/Remove) */
+.button-group .action-buttons > button:not(:last-child) {
+    margin-right: 10px;
+}
+
+.button-group .submit-button {
+    order: 2; /* Push it to the end in flexbox ordering */
+}
+
+    </style>
+
+
+
+</head>
+
+<body>
+
+    <form onsubmit="event.preventDefault(); saveDataAndRedirect();">
+
+        <div id="personalInfoBlock" class="block" style="display: block;">
+
+            <!-- Personal Information Fields -->
+       
+        
+        <h2>Personal Information</h2>
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" required>
+
+       
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone">
+        <label class="inline-label" for="linkedinToggle">Show LinkedIn:</label>
+        <input type="checkbox" id="linkedinToggle" onchange="toggleLinkedIn()">
+        
+<div id="linkedinField" style="display: none;">
+    <label for="linkd">Enter LinkedIn:</label>
+    <input type="text" id="linkd" name="linkd">
+</div>
+
+        
+
+        <label for="currp">Current post:</label>
+        <input type="text" id="currp" name="currp">
+
+        <label for="about">About yourself :</label>
+        <textarea id="about" name="about" rows="4"></textarea>
+
+        <label for="profileImage">Profile Image:</label>
+<input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewImage(event)">
+<img id="imagePreview" style="max-width: 200px; display: none;">
+
+<button type="button" class="button-next" onclick="goToNext('personalInfoBlock','languagesBlock')">Next</button>
+
+
+</div>
+
+<div id="languagesBlock" class="block" style="display:none">
+<h2>Langages</h2>
+<div id="LangagesFields">
+    <div class="LangagesItem">
+
+        <label for="LangagesN">Langage  :</label>
+        <input type="text" id="LangagesN" name="LangagesN">
+        <label for="LangagesL">Level:</label>
+       <select>
+        <option value="basic">basic</option>
+        <option value="communication">communication</option>
+        <option value="advanced">advanced</option>
+        <option value="native">native</option>
+       </select>
+    </div>
+
+
+</div>
+
+
+<div class="button-group">
+    <button type="button" class="button-back" onclick="goToPrevious('languagesBlock','personalInfoBlock')">Back</button>
+    
+    <!-- Group the action buttons together -->
+    <div type="button" class="action-buttons">
+        <button type="button" class="button-add" onclick="addLangagesField()">Add More Languages</button>
+        <button type="button" class="button-remove" id="removeLangagesBtn" onclick="removeLangagesField()" style="display: none;">Remove Last Language</button>
+    </div>
+
+    <button type="button" class="button-next" onclick="goToNext('languagesBlock','EducationsBlock')">Next</button>
+</div>
+
+
+</div>
+
+<div id="EducationsBlock" class="block" style="display:none">
+        <h2>Education</h2>
+    <div id="educationFields">
+        <div class="educationItem">
+            <label for="highestQualification">Grade</label>
+            <input type="text" id="hiQuali" name="hiQuali" data-storage-key="hiQuali">
+            <label for="university">University/Institution:</label>
+            <input type="text" id="university" name="university" data-storage-key="university">
+        </div>
+    </div>
+
+    
+
+<div class="button-group">
+    <button type="button" class="button-back" onclick="goToPrevious('EducationsBlock','languagesBlock')">Back</button>    
+    <!-- Group the action buttons together -->
+    <div class="action-buttons">
+        <button type="button" class="button-add" onclick="addEducationField()">Add More Education</button>
+        <button type="button" class="button-remove" id="removeEducationBtn" onclick="removeEducationField()" style="display: none;">Remove Last Education</button><br>
+    </div>
+
+    <button type="button" class="button-next" onclick="goToNext('EducationsBlock','ExperienceBlock')">Next</button>
+</div>
+
+</div>
+
+<div id="ExperienceBlock" class="block" style="display:none">
+        
+        <h2>Experience</h2>
+
+        <div id="ExperienceFields">
+            <div class="ExperienceItem">
+                <label for="expplace">where:</label>
+                <input type="text" id="expplace" name="explace">
+        
+                <label for="postTitle">Post Title:</label>
+                <input type="text" id="postTitle" name="postTitle">
+        
+                <label for="postDescription">Post Description:</label>
+                <textarea id="postDescription" name="postDescription" rows="4"></textarea>
+            </div>
+        </div>
+
+
+
+        <div class="button-group">
+            <button  type="button" class="button-back" onclick="goToPrevious('ExperienceBlock','EducationsBlock')">Back</button>
+            <!-- Group the action buttons together -->
+            <div class="action-buttons">
+                <button type="button" class="button-add" onclick="addExperienceField()">Add More Experience</button>
+                <button type="button" class="button-remove" id="removeExperienceBtn" onclick="removeExperienceField()" style="display: none;">Remove Last Experience</button><br>
+            </div>
+        
+            <button type="button" class="button-next" onclick="goToNext('ExperienceBlock','SkillsBlock')">Next</button>
+        </div>
+
+</div>
+
+
+<div id="SkillsBlock" class="block" style="display:none">
+
+        <h2>Skills</h2>
+        <div id="SkillsFields">
+            <div class="SkillsItem">
+
+
+                <label for="skillsD">Skill Domain :</label>
+                <input type="text" id="skillsD" name="skillsD">
+                <label for="skillsN">name  :</label>
+                <input type="text" id="skillsN" name="skillsN">
+                <label for="skillsL">Level:</label>
+                <input type="range" id="level${skillCounter}" name="level" min="1" max="10" value="5" oninput="updateLevelValue(this.value, 'levelDisplay${skillCounter}')">
+                <span id="levelDisplay${skillCounter}">5</span> / 10
+                <style>
+                 input[type="range"] {
+                     width: 80%; 
+                     margin: 10px 0;
+                   }
+                </style>
+            </div>
+
+        </div>
+
+        
+
+        <div class="button-group">
+            <button type="button" class="button-back" onclick="goToPrevious('SkillsBlock','ExperienceBlock')">Back</button>
+            <!-- Group the action buttons together -->
+            <div class="action-buttons">
+                <button type="button" class="button-add" onclick="addSkillsField()">Add More skills</button>
+                <button type="button" class="button-remove" id="removeSkillsBtn" onclick="removeSkillsField()" style="display: none;">Remove Last Skill</button><br>
+            </div>
+        
+            <button type="button" class="button-next" onclick="goToNext('SkillsBlock','HobbysBlock')">Next</button>
+        </div>
+
+</div>
+
+
+<div id="HobbysBlock" class="block" style="display:none">
+        <h2>Hobbys</h2>
+        <div id="HobbysFields">
+            <div class="HobbiesItem">
+        <label for="HobbiesN">Hobby  :</label>
+        <input type="text" id="HobbiesN" name="HobbiesN">
+            </div>
+        </div>
+        
+
+        <div class="button-group">
+            <button type="button" type="button" onclick="goToPrevious('HobbysBlock','SkillsBlock')">Back</button>
+            <div class="action-buttons">
+                <button type="button" class="button-add" onclick="addHobbysField()">Add More Hobby</button>
+                <button  type="button" class="button-remove" id="removeHobbysBtn" onclick="removeHobbysField()" style="display: none;">Remove Last Hobby</button><br>
+            </div>
+            <button type="submit" class="submit-button">Generate Resume</button>
+
+        </div>
+        
+
+    </div>
+
+
+    </form>
+    
+
+    <script src="page1.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>CV</title>
+</head>
+
+<body>
+    <div id="resume">
+
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="name-and-image">
+                <img src="" alt="profileImage" style="max-height: 150px; max-width: 150px;">
+                <h1 id="resumeName"></h1>
+              </div>
+              
+            <p id="resumeAbout"></p>
+            <p>Phone Number: <a href=# id="resumePhone"></a>
+                <p id="linkedinContainer">
+                    LinkedIn: <a href="#" id="resumeLinkd" target="_blank"></a>
+                </p>                
+            <p>Email: <a href="#" id="resumeEmail"></a>
+            <p id = "langages">Langages :</p>
+        </div>
+
+        <!-- Separator -->
+        <div class="separator"></div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="education" >
+
+                <dl>
+                    <dd id="educationSection">
+                        <h2 >Education</h2>
+                        <p id="resumeQuali"></p>
+                    </dd>
+                </dl>
+            </div>
+            <div class="experience">
+                <dl>
+                    <dd id="experienceSection">
+                        <h2 >Experience</h2>
+                        <p id="resumepostDes" ></p>
+                    </dd>
+                </dl>
+            </div>
+            <div class="Skills">
+                <dl>
+                    <dd id="skillsSection">
+                        <h2 >Skills</h2>
+                        <p id="" ></p>
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="hobbies">
+                <dl>
+                    <dd id="hobbysSection">
+                        <h2>Hobbies</h2>
+                        <p id="HobbiesN"></p>
+                    </dd>
+            </dl>
+            </div>
+        </div>
+    </div>
+    <div class="tail">
+        <button onclick="modifyFunction()">Modify</button>
+        <button onclick="downloadFunction()">Download PDF</button>
+        <button onclick="newFunction()">New</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="page2.js"></script>
+</body>
+</html>
